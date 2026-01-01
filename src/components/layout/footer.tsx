@@ -1,0 +1,35 @@
+import { Linkedin, MessageSquare } from 'lucide-react';
+
+export default function Footer() {
+  return (
+    <footer className="w-full border-t border-border/40">
+      <div className="container mx-auto flex flex-col items-center justify-between gap-4 py-10 md:h-24 md:flex-row md:py-0">
+        <div className="flex flex-col items-center gap-4 px-8 md:flex-row md:gap-2 md:px-0">
+          <p className="text-center text-sm leading-loose text-muted-foreground md:text-left">
+            © {new Date().getFullYear()} Wildan Ibnu Jamil. All rights reserved.
+          </p>
+        </div>
+        <div className="flex items-center gap-4">
+          <a 
+            href="https://www.linkedin.com/public-profile/settings?lipi=urn%3Ali%3Apage%3Ad_flagship3_profile_self_edit_contact-info%3Bm4uJE1SeS8iUaElkikKdkQ%3D%3D" 
+            target="_blank" 
+            rel="noopener noreferrer"
+            aria-label="LinkedIn"
+            className="text-muted-foreground transition-colors hover:text-foreground"
+          >
+            <Linkedin className="h-6 w-6" />
+          </a>
+          <a
+            href="https://wa.me/6287812333374"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="WhatsApp"
+            className="text-muted-foreground transition-colors hover:text-foreground"
+          >
+            <MessageSquare className="h-6 w-6" />
+          </a>
+        </div>
+      </div>
+    </footer>
+  );
+}

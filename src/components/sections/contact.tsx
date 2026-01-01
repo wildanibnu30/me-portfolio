@@ -83,7 +83,7 @@ export default function ContactSection() {
                     </CardContent>
                 </Card>
                 <div className="flex flex-col space-y-4 justify-center">
-                   <a href="https://www.linkedin.com/public-profile/settings?lipi=urn%3Ali%3Apage%3Ad_flagship3_profile_self_edit_contact-info%3Bm4uJE1SeS8iUaElkikKdkQ%3D%3D" target="_blank" rel="noopener noreferrer">
+                   <a href="https://www.linkedin.com/public-profile/settings?lipi=urn%3Ali%3Apage%3Ad_flagship3_profile_self_edit_contact-info%3Bm4uJE1SeS8iUaElkikKdkQ%3D%3D">
                         <Card className="hover:bg-accent/50 transition-colors border-border/40">
                             <CardHeader className="flex flex-row items-center gap-4">
                                 <Linkedin className="h-8 w-8 text-primary"/>
@@ -94,7 +94,7 @@ export default function ContactSection() {
                             </CardHeader>
                         </Card>
                    </a>
-                   <a href="https://wa.me/6287812333374" target="_blank" rel="noopener noreferrer">
+                   <a href="https://wa.me/6287812333374">
                         <Card className="hover:bg-accent/50 transition-colors border-border/40">
                             <CardHeader className="flex flex-row items-center gap-4">
                                 <MessageSquare className="h-8 w-8 text-primary"/>

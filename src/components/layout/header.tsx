@@ -32,7 +32,7 @@ export default function Header() {
         </nav>
         <div className="flex flex-1 items-center justify-end space-x-2">
           <Button size="sm" variant="secondary" asChild>
-            <Link href="/demo/cv" target="_blank" rel="noreferrer">
+            <Link href="/demo/cv">
               <Eye className="mr-2 h-4 w-4" />
               View CV
             </Link>

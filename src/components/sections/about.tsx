@@ -2,10 +2,10 @@ import Image from 'next/image';
 import { Card, CardContent } from '@/components/ui/card';
 
 const softwareSkills = [
-  { name: 'SolidWorks', imageSrc: '/images/logos/solidworks.png' },
-  { name: 'Inventor', imageSrc: '/images/logos/inventor.png' },
-  { name: 'AutoCAD', imageSrc: '/images/logos/autocad.png' },
-  { name: 'Excel', imageSrc: '/images/logos/excel.png' },
+  { name: 'SolidWorks', imageSrc: '/images/Tools/solidworks.png' },
+  { name: 'Inventor', imageSrc: '/images/Tools/inventor.png' },
+  { name: 'AutoCAD', imageSrc: '/images/Tools/autocad.png' },
+  { name: 'Excel', imageSrc: '/images/Tools/excel.png' },
 ];
 
 export default function AboutSection() {

@@ -12,8 +12,6 @@ export default function Footer() {
         <div className="flex items-center gap-4">
           <a 
             href="https://www.linkedin.com/public-profile/settings?lipi=urn%3Ali%3Apage%3Ad_flagship3_profile_self_edit_contact-info%3Bm4uJE1SeS8iUaElkikKdkQ%3D%3D" 
-            target="_blank" 
-            rel="noopener noreferrer"
             aria-label="LinkedIn"
             className="text-muted-foreground transition-colors hover:text-foreground"
           >
@@ -21,8 +19,6 @@ export default function Footer() {
           </a>
           <a
             href="https://wa.me/6287812333374"
-            target="_blank"
-            rel="noopener noreferrer"
             aria-label="WhatsApp"
             className="text-muted-foreground transition-colors hover:text-foreground"
           >

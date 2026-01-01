@@ -4,10 +4,13 @@ import { Card, CardHeader, CardTitle, CardDescription } from '@/components/ui/ca
 import Image from 'next/image';
 import { Button } from '@/components/ui/button';
 import { Eye, Play } from 'lucide-react';
+import { useRouter } from 'next/navigation';
 
 import { projects } from '@/lib/projects';
 
 export default function PortfolioSection() {
+    const router = useRouter();
+
     return (
         <section id="portfolio" className="w-full py-12 md:py-24">
             <div className="flex flex-col items-center text-center mb-12">
@@ -19,11 +22,11 @@ export default function PortfolioSection() {
                     <Card
                         key={project.id}
                         className={`${project.gridSpan} group relative flex cursor-pointer flex-col overflow-hidden border-border/40 transition-all duration-300 hover:shadow-primary/20 hover:shadow-lg hover:-translate-y-1 hover:scale-[1.005] will-change-transform`}
-                        onClick={() => window.open(`/demo/${project.id}`, '_blank')}
+                        onClick={() => router.push(`/demo/${project.id}`)}
                         role="button"
                         tabIndex={0}
                         onKeyDown={(e) => {
-                            if (e.key === 'Enter' || e.key === ' ') window.open(`/demo/${project.id}`, '_blank');
+                            if (e.key === 'Enter' || e.key === ' ') router.push(`/demo/${project.id}`);
                         }}
                     >
                         <div className="absolute inset-0 z-0 bg-black/10" />
@@ -59,7 +62,7 @@ export default function PortfolioSection() {
                                 onClick={(e) => {
                                     e.preventDefault();
                                     e.stopPropagation();
-                                    window.open(`/demo/${project.id}`, '_blank');
+                                    router.push(`/demo/${project.id}`);
                                 }}
                                 aria-label="Open project demo"
                             >

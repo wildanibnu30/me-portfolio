@@ -1,34 +1,26 @@
 'use client';
 
-import { Card, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import dynamic from 'next/dynamic';
 
-export default function CvDemoPage() {
+const PdfViewer = dynamic(() => import('@/components/ui/pdf-viewer'), {
+  ssr: false,
+  loading: () => <p className="text-muted-foreground">Loading PDF Viewer...</p>,
+});
+
+export default function CVDemoPage() {
+  const cvUrl = '/document/CV_Wildan_Ibnu_Jamil.pdf'; // Update with actual CV path
+
   return (
-    <div className="min-h-screen bg-background">
-      <div className="container mx-auto px-4 py-8">
-        <div className="mb-8">
-          <h1 className="text-3xl font-bold tracking-tighter mb-2">View CV</h1>
-          <p className="text-muted-foreground">Curriculum Vitae — PDF viewer.</p>
+    <div className="container py-24 px-4 md:px-6 max-w-4xl mx-auto flex flex-col items-center">
+      <div className="text-center mb-10 space-y-4">
+        <h1 className="text-3xl md:text-5xl font-bold tracking-tight">Curriculum Vitae</h1>
+        <div className="inline-block px-4 py-2 rounded-lg bg-primary/10 text-primary text-sm">
+          Swipe or use controls to navigate
         </div>
+      </div>
 
-        <Card className="border-border/40 overflow-hidden">
-          <CardHeader>
-            <CardTitle className="text-xl">CV</CardTitle>
-            <CardDescription>Preview dokumen PDF.</CardDescription>
-          </CardHeader>
-          <div className="px-6 pb-6">
-            <div className="w-full overflow-hidden rounded-lg border border-border/40 bg-background">
-              <div className="relative aspect-[4/5] w-full">
-                <iframe
-                  src="/document/CV_Wildan_Ibnu_Jamil.pdf"
-                  title="Wildan Ibnu Jamil CV"
-                  className="absolute inset-0 h-full w-full"
-                  loading="lazy"
-                />
-              </div>
-            </div>
-          </div>
-        </Card>
+      <div className="w-full">
+        <PdfViewer url={cvUrl} />
       </div>
     </div>
   );

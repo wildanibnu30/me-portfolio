@@ -2,9 +2,16 @@
 
 import { useParams } from 'next/navigation';
 import { useEffect, useState } from 'react';
+import dynamic from 'next/dynamic'; // Import dynamic
 import { Card, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
 import ThreeScene from '@/components/three-scene';
-import { getProjectById, projects } from '@/lib/projects';
+import { getProjectById } from '@/lib/projects';
+
+// Dynamically import PdfViewer to avoid SSR issues with react-pdf
+const PdfViewer = dynamic(() => import('@/components/ui/pdf-viewer'), {
+  ssr: false,
+  loading: () => <div className="h-[500px] w-full flex items-center justify-center text-muted-foreground animate-pulse bg-muted/20 rounded-xl">Loading PDF Viewer...</div>,
+});
 
 export default function DemoPage() {
   const params = useParams();
@@ -14,15 +21,11 @@ export default function DemoPage() {
   const [models, setModels] = useState<string[]>([]);
   const [activeModelUrl, setActiveModelUrl] = useState<string | null>(() => null);
   const [isModelsLoading, setIsModelsLoading] = useState(false);
-  const [isPdfLoading, setIsPdfLoading] = useState(false);
+  // Removed isPdfLoading state as PdfViewer handles it
 
   useEffect(() => {
     setProject(getProjectById(idNumber));
   }, [idNumber]);
-
-  useEffect(() => {
-    setIsPdfLoading(Boolean(project?.pdfUrl));
-  }, [project?.pdfUrl]);
 
   useEffect(() => {
     if (!project?.modelDir) {
@@ -76,7 +79,7 @@ export default function DemoPage() {
 
   return (
     <div className="min-h-screen bg-background">
-      <div className="container mx-auto px-4 py-8">
+      <div className="container mx-auto px-4 pt-24 md:pt-32 pb-8">
         <div className="mb-8">
           <h1 className="text-3xl font-bold tracking-tighter mb-2">{project.title}</h1>
           <p className="text-muted-foreground">{project.description}</p>
@@ -90,19 +93,8 @@ export default function DemoPage() {
             </CardHeader>
             <div className="px-6 pb-6 space-y-4">
               {project.pdfUrl && (
-                <div className="w-full overflow-hidden rounded-lg border border-border/40 bg-background">
-                  <div className="relative aspect-[4/5] w-full">
-                    {isPdfLoading && (
-                      <div className="absolute inset-0 animate-pulse bg-muted" />
-                    )}
-                    <iframe
-                      src={project.pdfUrl}
-                      title={`${project.title} PDF`}
-                      className="absolute inset-0 h-full w-full"
-                      loading="lazy"
-                      onLoad={() => setIsPdfLoading(false)}
-                    />
-                  </div>
+                <div className="w-full">
+                  <PdfViewer url={project.pdfUrl} />
                 </div>
               )}
 

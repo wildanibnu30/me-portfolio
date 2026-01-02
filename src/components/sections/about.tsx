@@ -53,7 +53,7 @@ export default function AboutSection() {
               {softwareSkills.map((skill) => (
                 <div
                   key={skill.name}
-                  className="group bg-background p-6 rounded-xl border border-border/50 hover:border-primary/30 hover:shadow-lg hover:shadow-primary/5 transition-all duration-300 flex items-center gap-4"
+                  className="group bg-background p-6 rounded-xl border border-border/50 hover:border-primary/30 hover:shadow-lg hover:shadow-primary/5 transition-all duration-300 flex flex-col items-center gap-3 text-center"
                 >
                   <div className="relative h-12 w-12 flex-shrink-0 transition-transform group-hover:scale-110 duration-300">
                     <Image

@@ -3,7 +3,7 @@
 import { Button } from '@/components/ui/button';
 import Image from 'next/image';
 import Link from 'next/link';
-import { ArrowRight, ChevronDown } from 'lucide-react';
+import { ArrowRight, ChevronDown, FileText } from 'lucide-react';
 
 export default function HeroSection() {
   return (
@@ -33,6 +33,13 @@ export default function HeroSection() {
             </p>
 
             <div className="flex flex-col sm:flex-row gap-4 pt-4">
+              {/* View CV Button - Prominent on Mobile Only */}
+              <Button size="lg" className="rounded-full h-12 px-8 text-base sm:hidden bg-primary text-primary-foreground hover:bg-primary/90" asChild>
+                <Link href="/demo/cv">
+                  <FileText className="mr-2 h-4 w-4" />
+                  View CV
+                </Link>
+              </Button>
               <Button size="lg" className="rounded-full h-12 px-8 text-base" asChild>
                 <Link href="#portfolio">
                   View Projects

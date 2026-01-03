@@ -1,5 +1,6 @@
 'use client';
 
+import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -8,7 +9,7 @@ import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form"
 import { useToast } from "@/hooks/use-toast"
-import { Linkedin, Send, Mail, MapPin } from 'lucide-react';
+import { Linkedin, Send, Mail, MapPin, Loader2 } from 'lucide-react';
 
 const formSchema = z.object({
     name: z.string().min(2, 'Name must be at least 2 characters.'),
@@ -18,6 +19,7 @@ const formSchema = z.object({
 
 export default function ContactSection() {
     const { toast } = useToast();
+    const [isSubmitting, setIsSubmitting] = useState(false);
 
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
@@ -28,13 +30,39 @@ export default function ContactSection() {
         },
     });
 
-    function onSubmit(values: z.infer<typeof formSchema>) {
-        // Form submission logic here
-        toast({
-            title: "Message Sent!",
-            description: "Thank you for reaching out. I'll get back to you soon.",
-        });
-        form.reset();
+    async function onSubmit(values: z.infer<typeof formSchema>) {
+        setIsSubmitting(true);
+        
+        try {
+            const response = await fetch('/api/contact', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(values),
+            });
+
+            const data = await response.json();
+
+            if (!response.ok) {
+                throw new Error(data.error || 'Failed to send message');
+            }
+
+            toast({
+                title: "Message Sent!",
+                description: "Thank you for reaching out. I'll get back to you soon.",
+            });
+            form.reset();
+        } catch (error: any) {
+            console.error('Error sending message:', error);
+            toast({
+                title: "Error",
+                description: error.message || "Failed to send message. Please try again or email me directly.",
+                variant: "destructive",
+            });
+        } finally {
+            setIsSubmitting(false);
+        }
     }
 
     return (
@@ -113,9 +141,22 @@ export default function ContactSection() {
                                         </FormItem>
                                     )} />
                                 </div>
-                                <Button type="submit" className="w-full h-12 text-base font-medium">
-                                    Send Message
-                                    <Send className="ml-2 h-4 w-4" />
+                                <Button 
+                                    type="submit" 
+                                    className="w-full h-12 text-base font-medium"
+                                    disabled={isSubmitting}
+                                >
+                                    {isSubmitting ? (
+                                        <>
+                                            <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                                            Sending...
+                                        </>
+                                    ) : (
+                                        <>
+                                            Send Message
+                                            <Send className="ml-2 h-4 w-4" />
+                                        </>
+                                    )}
                                 </Button>
                             </form>
                         </Form>

@@ -89,7 +89,11 @@ export default function DemoPage() {
           <Card className="border-border/40 overflow-hidden">
             <CardHeader>
               <CardTitle className="text-xl">Dokumentasi</CardTitle>
-              <CardDescription>Technical drawings and specifications.</CardDescription>
+              <CardDescription>
+                {project.id === 4 
+                  ? 'Motion study and simulation demonstration.' 
+                  : 'Technical drawings and specifications.'}
+              </CardDescription>
             </CardHeader>
             <div className="px-6 pb-6 space-y-4">
               {project.pdfUrl && (

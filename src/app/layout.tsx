@@ -11,7 +11,7 @@ export const metadata: Metadata = {
   title: 'Wildan Ibnu Jamil | Mechanical Design Engineer',
   description: 'Portfolio of Wildan Ibnu Jamil, a Senior Mechanical Design Engineer specializing in 3D modeling, simulation, and technical drafting.',
   icons: {
-    icon: '/images/wildsketch.ico',
+    icon: '/images/favicon.ico',
   },
 };
 

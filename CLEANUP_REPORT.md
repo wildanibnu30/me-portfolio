@@ -162,10 +162,14 @@ portofolio/
 - Documents: ✅ All valid (5 PDFs)
 - Video: ✅ Valid
 
+### ✅ PERBAIKAN: RESEND
+- 🚨 **Status:** Ditemukan penggunaan dinamis di `src/app/api/contact/route.ts`
+- ✅ **Tindakan:** Re-install `resend` (essential for contact form)
+
 ### 3. ✅ Dependencies Cleaned
-- Unused packages removed: 590 packages
-- Package.json size reduced: ~20%
-- No broken imports
+- Unused packages removed: 584 packages (Genkit & others)
+- Package.json size reduced: ~18%
+- No broken imports (Resend restored)
 
 ### 4. ✅ Website Functionality
 - **Status:** Website tetap berfungsi 100%
@@ -241,13 +245,12 @@ npm run dev  # ✅ Running successfully
 6. `src/app/optimize/` (folder + 2 files)
 7. `src/ai/` (folder + 3 files)
 
-### Dependencies Dihapus (6 packages)
+### Dependencies Dihapus (5 packages)
 1. @genkit-ai/google-genai
 2. @genkit-ai/next
 3. genkit
 4. genkit-cli
 5. dotenv
-6. resend
 
 ---
 

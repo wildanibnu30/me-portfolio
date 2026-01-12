@@ -12,9 +12,9 @@ export default function Footer() {
         <div className="flex items-center gap-4">
           <a
             href="https://linkedin.com/in/wildan-ibnu-1b8a2a32a"
-            aria-label="LinkedIn"
             target="_blank"
             rel="noopener noreferrer"
+            aria-label="LinkedIn"
             className="text-muted-foreground transition-colors hover:text-foreground"
           >
             <Linkedin className="h-6 w-6" />

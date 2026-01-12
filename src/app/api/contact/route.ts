@@ -3,11 +3,11 @@ import { NextRequest, NextResponse } from 'next/server';
 export async function POST(request: NextRequest) {
   try {
     const body = await request.json();
-    const { name, email, subject, message } = body;
+    const { name, email, subject: formSubject, message } = body;
 
     if (!name || !email || !message) {
       return NextResponse.json(
-        { error: 'Nama, Email, dan Pesan wajib diisi.' },
+        { error: 'System requirement: Identity, Email, and Message are mandatory.' },
         { status: 400 }
       );
     }
@@ -23,34 +23,40 @@ export async function POST(request: NextRequest) {
       const emailData = await resendClient.emails.send({
         from: fromEmail,
         to: RECIPIENT_EMAIL,
-        subject: `[Portfolio Contact] ${subject || 'New Message'} from ${name}`,
+        subject: `[PROJ INQUIRY] ${formSubject || 'General Collaboration'} - from ${name}`,
         html: `
-          <div style="font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; max-width: 600px; margin: 0 auto; color: #333; border: 1px solid #eee; border-radius: 10px; overflow: hidden;">
-            <div style="background-color: #000; color: #fff; padding: 20px; text-align: center;">
-              <h1 style="margin: 0; font-size: 20px;">Pesan Kontak Baru</h1>
-              <p style="margin: 5px 0 0; opacity: 0.8; font-size: 14px;">Portofolio Wildan Ibnu Jamil</p>
+          <div style="font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; max-width: 600px; margin: 0 auto; line-height: 1.6; color: #333;">
+            <div style="background-color: #000; padding: 20px; text-align: center; border-radius: 8px 8px 0 0;">
+              <h1 style="color: #fff; margin: 0; font-size: 20px; letter-spacing: 2px; text-transform: uppercase;">Technical Inquiry</h1>
             </div>
-            <div style="padding: 30px;">
-              <div style="margin-bottom: 25px;">
-                <p style="margin: 0; color: #999; font-size: 12px; text-transform: uppercase; letter-spacing: 1px;">Pengirim</p>
-                <p style="margin: 5px 0; font-size: 16px; font-weight: bold;">${name}</p>
-                <p style="margin: 0; font-size: 14px; color: #007bff;"><a href="mailto:${email}" style="color: #007bff; text-decoration: none;">${email}</a></p>
-              </div>
+            <div style="padding: 30px; border: 1px solid #e5e5e5; border-top: none; border-radius: 0 0 8px 8px;">
+              <p style="margin-bottom: 25px;">You have received a new collaborative inquiry via the portfolio interface.</p>
               
-              <div style="margin-bottom: 25px;">
-                <p style="margin: 0; color: #999; font-size: 12px; text-transform: uppercase; letter-spacing: 1px;">Subjek</p>
-                <p style="margin: 5px 0; font-size: 16px;">${subject || 'Tanpa Subjek'}</p>
-              </div>
+              <table style="width: 100%; border-collapse: collapse;">
+                <tr>
+                  <td style="padding: 10px 0; border-bottom: 1px solid #f0f0f0; width: 150px;"><strong>Client/Org:</strong></td>
+                  <td style="padding: 10px 0; border-bottom: 1px solid #f0f0f0;">${name}</td>
+                </tr>
+                <tr>
+                  <td style="padding: 10px 0; border-bottom: 1px solid #f0f0f0;"><strong>Email:</strong></td>
+                  <td style="padding: 10px 0; border-bottom: 1px solid #f0f0f0;"><a href="mailto:${email}" style="color: #007bff; text-decoration: none;">${email}</a></td>
+                </tr>
+                <tr>
+                  <td style="padding: 10px 0; border-bottom: 1px solid #f0f0f0;"><strong>Scope:</strong></td>
+                  <td style="padding: 10px 0; border-bottom: 1px solid #f0f0f0;">${formSubject || 'N/A'}</td>
+                </tr>
+              </table>
 
-              <div style="margin-bottom: 10px;">
-                <p style="margin: 0; color: #999; font-size: 12px; text-transform: uppercase; letter-spacing: 1px;">Isi Pesan</p>
-                <div style="margin-top: 10px; background-color: #f9f9f9; padding: 20px; border-radius: 8px; font-size: 15px; line-height: 1.6; color: #444; border-left: 4px solid #000;">
+              <div style="margin-top: 30px;">
+                <p style="margin-bottom: 10px;"><strong>Technical Overview:</strong></p>
+                <div style="background-color: #f9f9f9; padding: 20px; border-radius: 5px; border-left: 4px solid #000; font-style: italic;">
                   ${message.replace(/\n/g, '<br>')}
                 </div>
               </div>
-            </div>
-            <div style="background-color: #f4f4f4; padding: 15px; text-align: center; font-size: 11px; color: #888;">
-              Pesan ini dikirim secara otomatis melalui formulir kontak portofolio Anda.
+
+              <div style="margin-top: 40px; border-top: 1px solid #eee; padding-top: 20px; font-size: 11px; color: #999;">
+                <p>This inquiry was dispatched from the Mechanical Innovation Hub (Wildan Ibnu Jamil Portfolio).</p>
+              </div>
             </div>
           </div>
         `,
@@ -58,29 +64,26 @@ export async function POST(request: NextRequest) {
       });
 
       if (emailData.error) {
-        throw new Error(emailData.error.message || 'Gagal mengirim email melalui layanan Resend.');
+        throw new Error(emailData.error.message || 'Dispatch error at email gateway.');
       }
 
       return NextResponse.json({
         success: true,
-        message: 'Email berhasil terkirim.',
+        message: 'Inquiry successfully dispatched to the engineering queue.',
         id: emailData.data?.id
       });
     } else {
-      // Logic fallback if API key not set (production should have it)
-      console.warn('RESEND_API_KEY is missing. Email simulation mode active.');
       return NextResponse.json({
         success: true,
-        message: 'Pesan diterima (Simulasi). Tambahkan RESEND_API_KEY untuk pengiriman email aktif.',
-        simulated: true
+        message: 'Inquiry cached. Please configure RESEND_API_KEY to active production mail.',
+        warning: 'Email service inactive'
       });
     }
   } catch (error: any) {
     console.error('Error sending email:', error);
     return NextResponse.json(
-      { error: 'Gagal memproses permintaan email.', details: error.message },
+      { error: 'Critical failure at dispatch gateway.', details: error.message },
       { status: 500 }
     );
   }
 }
-

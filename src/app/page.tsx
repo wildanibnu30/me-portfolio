@@ -1,8 +1,8 @@
 import HeroSection from '@/components/sections/hero';
 import AboutSection from '@/components/sections/about';
+import VideoShowcase from '@/components/sections/video-showcase';
 import ServicesSection from '@/components/sections/services';
 import PortfolioSection from '@/components/sections/portfolio';
-import VideoShowcase from '@/components/sections/video-showcase';
 import ContactSection from '@/components/sections/contact';
 
 export default function Home() {

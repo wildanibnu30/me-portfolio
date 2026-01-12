@@ -9,7 +9,6 @@ import { Eye, Play, ArrowUpRight } from 'lucide-react';
 import { projects } from '@/lib/projects';
 
 export default function PortfolioSection() {
-
     return (
         <section id="portfolio" className="w-full py-24">
             <div className="container px-4 md:px-6">

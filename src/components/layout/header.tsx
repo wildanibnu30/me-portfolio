@@ -9,9 +9,10 @@ import { useState } from 'react';
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
 
 const navLinks = [
-  { href: '#about', label: 'About' },
-  { href: '#portfolio', label: 'Work' },
-  { href: '#contact', label: 'Contact' },
+  { href: '/#about', label: 'About' },
+  { href: '/#video-showcase', label: 'Video' },
+  { href: '/#portfolio', label: 'Work' },
+  { href: '/#contact', label: 'Contact' },
 ];
 
 export default function Header() {

@@ -3,7 +3,7 @@
 import { Button } from '@/components/ui/button';
 import Image from 'next/image';
 import Link from 'next/link';
-import { ArrowRight, ChevronDown, FileText } from 'lucide-react';
+import { ArrowRight, ChevronDown, FileText, Play } from 'lucide-react';
 
 export default function HeroSection() {
   return (
@@ -41,13 +41,19 @@ export default function HeroSection() {
                 </Link>
               </Button>
               <Button size="lg" className="rounded-full h-12 px-8 text-base" asChild>
-                <Link href="#portfolio">
+                <Link href="/#portfolio">
                   View Projects
                   <ArrowRight className="ml-2 h-4 w-4" />
                 </Link>
               </Button>
+              <Button size="lg" variant="outline" className="rounded-full h-12 px-8 text-base border-primary/20 hover:bg-primary/5 group" asChild>
+                <Link href="/#video-showcase">
+                  <Play className="mr-2 h-4 w-4 fill-primary text-primary group-hover:fill-primary/80" />
+                  Watch Video
+                </Link>
+              </Button>
               <Button size="lg" variant="outline" className="rounded-full h-12 px-8 text-base hover:bg-secondary/50" asChild>
-                <Link href="#contact">Contact Me</Link>
+                <Link href="/#contact">Contact Me</Link>
               </Button>
             </div>
           </div>
@@ -81,7 +87,7 @@ export default function HeroSection() {
       </div>
 
       <div className="absolute bottom-8 left-1/2 -translate-x-1/2 animate-bounce hidden md:flex">
-        <Link href="#about" className="text-muted-foreground hover:text-primary transition-colors">
+        <Link href="/#about" className="text-muted-foreground hover:text-primary transition-colors">
           <ChevronDown className="h-6 w-6" />
         </Link>
       </div>

@@ -2,14 +2,13 @@
 
 import { Card, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
 import Image from 'next/image';
+import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { Eye, Play, ArrowUpRight } from 'lucide-react';
-import { useRouter } from 'next/navigation';
 
 import { projects } from '@/lib/projects';
 
 export default function PortfolioSection() {
-    const router = useRouter();
 
     return (
         <section id="portfolio" className="w-full py-24">
@@ -29,10 +28,10 @@ export default function PortfolioSection() {
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-10 pb-12">
                     {projects.map((project) => (
-                        <div
+                        <Link
                             key={project.id}
-                            className="group flex flex-col h-full overflow-hidden rounded-2xl border border-border/50 bg-card hover:border-primary/50 hover:shadow-2xl transition-all duration-300 cursor-pointer"
-                            onClick={() => router.push(`/demo/${project.id}`)}
+                            href={`/demo/${project.id}`}
+                            className="group flex flex-col h-full overflow-hidden rounded-2xl border border-border/50 bg-card hover:border-primary/50 hover:shadow-2xl transition-all duration-300"
                         >
                             {/* Image Container */}
                             <div className="relative w-full aspect-[4/3] md:aspect-video overflow-hidden bg-muted">
@@ -61,8 +60,8 @@ export default function PortfolioSection() {
                                     {project.tag && (
                                         <span
                                             className={`flex-shrink-0 inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium border ${project.isIndustryProject
-                                                    ? 'bg-amber-500/20 text-amber-600 dark:text-amber-400 border-amber-500/40 shadow-sm shadow-amber-500/20'
-                                                    : 'bg-primary/10 text-primary border-primary/20'
+                                                ? 'bg-amber-500/20 text-amber-600 dark:text-amber-400 border-amber-500/40 shadow-sm shadow-amber-500/20'
+                                                : 'bg-primary/10 text-primary border-primary/20'
                                                 }`}
                                         >
                                             {project.isIndustryProject && (
@@ -82,7 +81,7 @@ export default function PortfolioSection() {
                                     {project.description}
                                 </p>
                             </div>
-                        </div>
+                        </Link>
                     ))}
                 </div>
             </div>

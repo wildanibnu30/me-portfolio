@@ -2,6 +2,7 @@ import HeroSection from '@/components/sections/hero';
 import AboutSection from '@/components/sections/about';
 import ServicesSection from '@/components/sections/services';
 import PortfolioSection from '@/components/sections/portfolio';
+import VideoShowcase from '@/components/sections/video-showcase';
 import ContactSection from '@/components/sections/contact';
 
 export default function Home() {
@@ -9,6 +10,7 @@ export default function Home() {
     <div className="flex flex-col min-h-screen">
       <HeroSection />
       <AboutSection />
+      <VideoShowcase />
       <ServicesSection />
       <PortfolioSection />
       <ContactSection />
